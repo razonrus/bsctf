@@ -1,11 +1,11 @@
 ﻿@model SearchEngine.User[]
 
 @{
-    ViewBag.Title = "Search Page";
+    ViewBag.Title = "Managers Search Page";
 }
 
 <div class="jumbotron">
-    <h1>Search user</h1>
+    <h1>Search Managers</h1>
     @using (Html.BeginForm())
     {
   <input type="text"/>
@@ -17,7 +17,7 @@
 @if (Model != null)
 {
     <div class="row">
-        Search results:
+        Found Managers:
         <ul>
             @foreach (var user in Model)
             {
