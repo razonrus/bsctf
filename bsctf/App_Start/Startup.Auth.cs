@@ -58,11 +58,11 @@ namespace bsctf
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "926574695063-6vcuktek0sqlbgn3pq75k87br6onhnpg.apps.googleusercontent.com",
+                ClientSecret = "cgWGZQ4a6gPatrpwSWww_EIi"
+            });
         }
     }
 }
