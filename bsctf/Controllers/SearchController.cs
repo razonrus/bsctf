@@ -3,6 +3,7 @@ using SearchEngine;
 
 namespace bsctf.Controllers
 {
+    [LogActionFilter, Authorize]
     public class SearchController : Controller
     {
         private readonly ISearch searchService;

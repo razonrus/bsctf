@@ -2,6 +2,7 @@
 
 namespace bsctf.Controllers
 {
+    [LogActionFilter]
     public class HomeController : Controller
     {
         public ActionResult Index()
