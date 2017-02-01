@@ -321,8 +321,8 @@
   </Target>-->
   <Target Name="AfterBuild">
     <ItemGroup>
-      <SourceFiles Include="../../bsctf-search/CustomSearch/bin/Debug/CustomSearch.dll" />
+      <SourceFiles Include="../../bsctf-search/CustomSearch/bin/Release/CustomSearch.dll" />
     </ItemGroup>
-    <Copy SourceFiles="@(SourceFiles)" DestinationFolder="$(TargetDir)" Condition="Exists('../../bsctf-search/CustomSearch/bin/Debug/CustomSearch.dll')" />
+    <Copy SourceFiles="@(SourceFiles)" DestinationFolder="$(TargetDir)" Condition="Exists('../../bsctf-search/CustomSearch/bin/Release/CustomSearch.dll')" />
   </Target>
 </Project>

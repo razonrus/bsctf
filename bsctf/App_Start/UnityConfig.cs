@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -37,15 +37,22 @@ namespace bsctf
         {
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
-
+            
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"bin\CustomSearch.dll");
-            var searchType =
-                (File.Exists(path)
-                    ? Assembly.LoadFile(path)?.ExportedTypes?.SingleOrDefault(t => typeof (ISearch).IsAssignableFrom(t))
-                    : null)
-                ??
-                typeof (DefaultSearch);
-            container.RegisterType(typeof(ISearch), searchType);
+            
+            ISearch searcher = null;
+            if (File.Exists(path))
+            {
+                var assembly = Assembly.LoadFile(path);
+
+                var type = assembly.ExportedTypes.Single(t => typeof(ISearch).IsAssignableFrom(t));
+
+                searcher = (ISearch)Activator.CreateInstance(assembly.FullName, type.FullName).Unwrap();
+            }
+            if (searcher == null)
+                searcher = new DefaultSearch();
+
+            container.RegisterInstance(typeof(ISearch), searcher);
         }
     }
 }
