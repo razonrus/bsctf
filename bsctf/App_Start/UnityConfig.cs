@@ -2,6 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using bsctf.Controllers;
+using bsctf.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using SearchEngine;
 
@@ -53,6 +57,8 @@ namespace bsctf
                 searcher = new DefaultSearch();
 
             container.RegisterInstance(typeof(ISearch), searcher);
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
         }
     }
 }
