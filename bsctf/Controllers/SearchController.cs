@@ -21,8 +21,19 @@ namespace bsctf.Controllers
         [HttpPost]
         public ActionResult Index(string query)
         {
-            var model = searchService.Search(query);
+            var model = new SearchModel
+            {
+                Users = searchService.Search(query),
+                Query = query
+            };
             return View(model);
         }
+    }
+
+    public class SearchModel
+    {
+        public SearchEngine.User[] Users { get; set; }
+
+        public string Query { get; set; }
     }
 }

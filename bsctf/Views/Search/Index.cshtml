@@ -1,4 +1,4 @@
-﻿@model SearchEngine.User[]
+﻿@model bsctf.Controllers.SearchModel
 
 @{
     ViewBag.Title = "Поиск по менеджерам";
@@ -8,7 +8,7 @@
     <h1>Поиск по менеджерам</h1>
     @using (Html.BeginForm())
     {
-        <input type="text" name="query" style="width: 500px;"/>
+        <input type="text" name="query" style="width: 500px;" value="@(Model?.Query)"/>
         <br/>
         <br/>
         <p><button class="btn btn-primary btn-lg">Искать &raquo;</button>
@@ -26,11 +26,10 @@
     <div class="row">
         <h3>Результаты поиска:</h3>
         <ul>
-            @foreach (var user in Model)
+            @foreach (var user in Model.Users)
             {
                 <li>
                     @user.FirstName
-                    &nbsp;
                     @user.LastName
                 </li>
             }
