@@ -1,3 +1,4 @@
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,20 +10,20 @@ namespace bsctf.Controllers
 {
     public class LogActionFilter : ActionFilterAttribute
     {
-        public static Dictionary<string, long> log = new Dictionary<string, long>();
+        private readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        public static Dictionary<string, long> counters = new Dictionary<string, long>();
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var name = HttpContext.Current.User.Identity.Name;
-            if (log.ContainsKey(name))
-                log[name]++;
+            if (counters.ContainsKey(name))
+                counters[name]++;
             else
-                log.Add(name, 1);
+                counters.Add(name, 1);
 
-            if (log[name]%10 == 0)
-            {
-                
-            }
+            if (counters[name]%10 == 0)
+                logger.Info("{0} - {1}", name, counters[name]);
         }
 
 
