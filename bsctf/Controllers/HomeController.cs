@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 
 namespace bsctf.Controllers
 {
@@ -17,6 +18,12 @@ namespace bsctf.Controllers
             return View();
         }
 
+        public ActionResult Log()
+        {
+            if (User.Identity.Name == "iruslansafin@gmail.com")
+                return Content(string.Join("<br/>", LogActionFilter.counters.Select(x => $"{x.Key} - {x.Value}")));
+            return Content("");
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
