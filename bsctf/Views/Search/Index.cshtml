@@ -1,23 +1,30 @@
 ﻿@model SearchEngine.User[]
 
 @{
-    ViewBag.Title = "Managers Search Page";
+    ViewBag.Title = "Поиск по менеджерам";
 }
 
 <div class="jumbotron">
-    <h1>Search Managers</h1>
+    <h1>Поиск по менеджерам</h1>
     @using (Html.BeginForm())
     {
-  <input type="text" name="query"/>
-        <p><button href="http://asp.net" class="btn btn-primary btn-lg">Search &raquo;</button>
+        <input type="text" name="query" style="width: 500px;"/>
+        <br/>
+        <br/>
+        <p><button class="btn btn-primary btn-lg">Искать &raquo;</button>
         </p>
     }
 
 </div>
+<span>Поиск НЕ производится по пользователям, зарегистрированным на данном сайте</span>
+<br />
+<span>Все данные вымышлены, совпадения случайны</span><br />
+<span>Минимальная длина поискового запроса - 4 символа</span>
+<hr/>
 @if (Model != null)
 {
     <div class="row">
-        Found Managers:
+        <h3>Результаты поиска:</h3>
         <ul>
             @foreach (var user in Model)
             {

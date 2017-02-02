@@ -17,6 +17,10 @@ namespace bsctf.Controllers
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var name = HttpContext.Current.User.Identity.Name;
+
+            if (string.IsNullOrEmpty(name))
+                return;
+
             if (counters.ContainsKey(name))
                 counters[name]++;
             else
