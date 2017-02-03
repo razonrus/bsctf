@@ -21,7 +21,7 @@ namespace bsctf.Controllers
         public ActionResult Log()
         {
             if (User.Identity.Name == "iruslansafin@gmail.com")
-                return Content(string.Join("<br/>", new[] {"Results:"}.Concat(LogActionFilter.counters
+                return Content(string.Join("<br/>", new[] {"Results:"}.Concat(LogActionFilter.Counters
                     .OrderByDescending(x => x.Value)
                     .Select(x => $"{x.Key} - {x.Value}"))));
             return Content("");

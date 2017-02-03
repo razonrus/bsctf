@@ -1,10 +1,8 @@
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace bsctf.Controllers
 {
@@ -12,7 +10,7 @@ namespace bsctf.Controllers
     {
         private readonly Logger logger = LogManager.GetCurrentClassLogger();
 
-        public static Dictionary<string, long> counters = new Dictionary<string, long>();
+        public static readonly Dictionary<string, long> Counters = new Dictionary<string, long>();
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -21,23 +19,13 @@ namespace bsctf.Controllers
             if (string.IsNullOrEmpty(name))
                 return;
 
-            if (counters.ContainsKey(name))
-                counters[name]++;
+            if (Counters.ContainsKey(name))
+                Counters[name]++;
             else
-                counters.Add(name, 1);
+                Counters.Add(name, 1);
 
-            if (counters[name]%10 == 0)
-                logger.Info("{0} - {1}", name, counters[name]);
+            if (Counters[name]%100 == 0)
+                logger.Info("{0} - {1}", name, Counters[name]);
         }
-
-
-        private void Log(string methodName, RouteData routeData)
-        {
-            var controllerName = routeData.Values["controller"];
-            var actionName = routeData.Values["action"];
-            var message = String.Format("{0} controller:{1} action:{2}", methodName, controllerName, actionName);
-            Debug.WriteLine(message, "Action Filter Log");
-        }
-
     }
 }
