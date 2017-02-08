@@ -9,7 +9,7 @@ namespace Tools
 {
     public class Tests
     {
-        private const string BasePath = @"";
+        private const string BasePath = @"\";
 
         [Test]
         public void Test()
@@ -20,10 +20,14 @@ namespace Tools
 
             var file = File.ReadAllText(BasePath + "orig.txt").ToLower();
 
-            var foundEmailsCount = emails.Count(x =>
-                //new Regex(@"(\W|^)(" + Regex.Escape(x) + @")(\W|$)", RegexOptions.Multiline).IsMatch(file)
-                file.Contains(x)
-                );
+            var foundEmailsCount = 0;
+            foreach (var x in emails)
+            {
+                if (file.Contains(x))
+                    foundEmailsCount++;
+                else
+                    Console.WriteLine(x);
+            }
 
             Console.WriteLine(foundEmailsCount);
             Console.WriteLine(foundEmailsCount/(decimal) emails.Count());
